@@ -1,0 +1,85 @@
+#include <iostream>
+using namespace std;
+class SPM
+{
+    public:
+    int row, col, val;
+    void input(SPM arr[],int r,int c);
+    void transpose(int r,int c,SPM arr[100],SPM transp[100]);
+};
+
+void SPM::input(SPM arr[100],int r,int c)
+    {
+        cout << "Enter the elements of the matrix: " << endl;
+        int k=1;
+        for(int i = 0; i < r; i++)
+        {
+            for(int j = 0; j < c; j++)
+            {
+                int e;
+                cin>>e;
+                if(e!=0)
+                {
+                   arr[k].row=i;
+                   arr[k].col=j;
+                   arr[k].val=e;
+                   k++;
+                }
+            }
+        }
+        arr[0].row=r;
+        arr[0].col=c;
+        arr[0].val=k-1;
+
+       for (int p = 0; p<= arr[0].val; p++)
+               cout<<arr[p].row<<"\t"<<arr[p].col<<"\t"<<arr[p].val<<endl;
+    }
+void SPM::transpose(int r,int c,SPM arr[100],SPM transp[100])
+    {
+        int sp[100]={0};
+        int mp[100], i;
+        transp[0].row=arr[0].col;
+        transp[0].col=arr[0].row;
+        transp[0].val=arr[0].val;
+        for(i=0; i<arr[0].col; i++)
+        {
+           mp[i]=0;
+        }
+        for(i=1;i<=arr[0].val;i++)
+        {
+            mp[arr[i].col]++;
+        }
+        sp[0]=1;
+        for(i=1; i<arr[0].col; i++)
+        {
+            sp[i]=sp[i-1]+mp[i-1];
+        }
+        int j;
+        for(i=1; i<=arr[0].val; i++)
+        {
+           // cout<<"entered T"<<endl;
+            j=sp[arr[i].col]++;
+            transp[j].row=arr[i].col;
+            transp[j].col=arr[i].row;
+            transp[j].val=arr[i].val;
+        }
+        for (int p = 0; p<= arr[0].val; p++)
+               cout<<transp[p].row<<"\t"<<transp[p].col<<"\t"<<transp[p].val<<endl;
+    }
+int main()
+{
+    cout << "Enter the dimensions of matrix:" << endl;
+    int r,c;
+    cin>>r>>c;
+    SPM m;char ch;
+    SPM a[100];
+    m.input(a,r,c);
+    cout<<"enter y if you want to take transpose:"<<endl;
+    cin>>ch;
+    if(ch=='y')
+    {
+        SPM transp[100];
+        m.transpose(r,c,a,transp);
+  }
+    return 0;
+}

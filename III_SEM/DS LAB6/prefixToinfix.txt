@@ -1,0 +1,68 @@
+#include <iostream>
+#include<cstring>
+using namespace std;
+
+class stk
+{
+public:
+    char arr[100][100];
+    int top;
+    stk()
+    {top=-1;}
+    void push(char exp[])
+    {
+        top++;
+        strcpy(arr[top],exp);
+    }
+    char *pop()
+    {
+        return arr[top--];
+    }
+};
+void prefToInf(char prefix[])
+{
+    stk obj;
+    char sym[2],op1[100],op2[100],infix[100];
+    int n=strlen(prefix);
+    for(int i=0;i<=n/2;i++)
+    {
+        char c=prefix[n-i-1];
+        prefix[n-i-1]=prefix[i];
+        prefix[i]=c;
+    }
+    for(int i=0;prefix[i]!='\0';i++)
+    {
+        sym[0]=prefix[i];sym[1]='\0';
+        if(prefix[i]=='*'||prefix[i]=='+'||prefix[i]=='-'||prefix[i]=='/')
+        {
+            strcpy(op2,obj.pop());
+            strcpy(op1,obj.pop());
+            strcpy(infix,")");
+            strcat(infix,op1);
+            strcat(infix,sym);
+            strcat(infix,op2);
+            strcat(infix,"(");
+            obj.push(infix);
+        }
+        else
+        {
+            obj.push(sym);
+        }
+    }
+    char res[100];
+    strcpy(res,obj.pop());
+    n=strlen(res);
+    for(int i=0;i<=n/2;i++)
+    {
+        char c=res[n-i-1];
+        res[n-i-1]=res[i];
+        res[i]=c;
+    }
+    cout<<res<<endl;
+}
+int main()
+{
+    char pfx[100];
+    cin>>pfx;
+    prefToInf(pfx);
+}

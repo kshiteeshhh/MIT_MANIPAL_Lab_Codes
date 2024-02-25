@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shopping Cart - Online Bookstore</title>
+  </head>
+  <body>
+    <h1>Your Shopping Cart</h1>
+    <form action="/update_cart" method="post">
+      <div>
+        <p>Item: Book Title 1</p>
+        <p>Price: $15.00</p>
+        <label for="qty1">Quantity:</label>
+        <input type="number" id="qty1" name="qty1" value="1" /><br />
+      </div>
+      <div>
+        <p>Item: Book Title 2</p>
+        <p>Price: $20.00</p>
+        <label for="qty2">Quantity:</label>
+        <input type="number" id="qty2" name="qty2" value="1" /><br />
+      </div>
+      <!-- More items -->
+      <p>Total: $35.00</p>
+      <input type="submit" value="Update Cart" />
+    </form>
+    <a href="payment.html">Proceed to Payment</a><br />
+    <a href="index.html">Continue Shopping</a>
+  </body>
+</html>

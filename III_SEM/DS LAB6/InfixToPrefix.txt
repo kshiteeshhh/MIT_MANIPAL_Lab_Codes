@@ -1,0 +1,152 @@
+#include<iostream>
+using namespace std;
+#include <cstring>
+class Stack
+{
+public:
+     int top;char s[100];
+     Stack()
+    { top = -1;}
+     void push(int n);
+     void pop();
+     void display();
+     char topfn();
+     bool isempty();
+};
+void Stack:: push(int n)
+{
+   if(top==99)
+   {
+      cout<<"stack overflow"<<endl;
+      return;
+   }
+   s[++top]=n;
+}
+void Stack::pop()
+{
+   if(top==-1)
+   {
+      cout<<"stack is empty"<<endl;
+      return;
+   }
+   top--;
+}
+char Stack::topfn()
+{
+   return s[top];
+}
+bool Stack::isempty()
+{
+  if(top==-1){return true;}
+  return false;
+}
+void Stack::display()
+{
+   if(top==-1)
+   {
+      cout<<"stack is empty"<<endl;
+      return;
+   }
+   cout<<"elements of the stack"<<endl;
+   for(int i=0;i<=top;i++)
+   {
+      cout<<s[i]<<" ";
+   }
+   cout<<endl;
+}
+int prec(char c)
+{
+    int n;
+    switch(c)
+    {
+        case '*':
+        case '/':n=4;
+                break;
+        case '+':
+        case '-':n=3;
+                 break;
+        case ')':n=2;
+                 break;
+    }
+    return n;
+}
+int main()
+{
+    char s[100];
+    cin>>s;
+    Stack obj; char pref[100];
+    int k=0;
+    int n=strlen(s); char c1,c2;int precedence;
+    for(int i=0;i<=n/2;i++)
+    {
+        char c=s[i];
+        s[i]=s[n-i-1];
+        s[n-i-1]=c;
+    }
+    for(int i=0;i<n;i++)
+    {
+       c1=s[i];
+       switch(c1)
+       {
+          case ')':obj.push(c1);
+                   break;
+          case '(': {char ch=obj.topfn();
+                     obj.pop();
+                    while(ch!=')')
+                    {
+                       if(!obj.isempty())
+                       {
+                          pref[k++]=ch;
+                            ch=obj.topfn();
+                            obj.pop();
+                       }
+                       else
+                       {
+                           break;
+                       }
+                    }
+                    break;
+          }
+          case '*':
+          case '+':
+          case '-':
+          case '/':  if(!obj.isempty())
+                     {
+                        c2=obj.topfn();
+                        obj.pop();
+                        precedence=prec(c1);
+                        while(precedence<prec(c2))
+                        {
+                           pref[k++]=c2;
+                           if(!obj.isempty())
+                           {c2=obj.topfn();
+                           obj.pop();}
+                           else
+                           {break;}
+                        }
+                        if(precedence>=prec(c2))
+                        {
+                           obj.push(c2);
+                        }
+                     }
+                     obj.push(c1);
+                     break;
+            default: pref[k++]=c1;
+
+        }
+    }
+    while(!obj.isempty())
+    {
+       pref[k++]=obj.topfn();
+       obj.pop();
+    }
+    pref[k]='\0';
+    n=strlen(pref);
+    for(int i=0;i<=n/2;i++)
+    {
+        char c=pref[i];
+        pref[i]=pref[n-i-1];
+        pref[n-i-1]=c;
+    }
+    cout<<pref<<endl;
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment - Online Bookstore</title>
+</head>
+<body>
+    <h1>Payment by Credit Card</h1>
+    <form action="/submit_payment" method="post">
+        <label for="cardNumber">Card Number:</label><br>
+        <input type="text" id="cardNumber" name="cardNumber" required><br>
+
+        <label for="cardExpiry">Expiry Date:</label><br>
+        <input type="month" id="cardExpiry" name="cardExpiry" required><br>
+
+        <label for="cardCVV">CVV:</label><br>
+        <input type="text" id="cardCVV" name="cardCVV" required><br>
+
+        <input type="submit" value="Pay">
+    </form>
+    <a href="cart.html">Back to Cart</a>
+</body>
+</html>

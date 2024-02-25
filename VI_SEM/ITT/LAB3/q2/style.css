@@ -1,0 +1,14 @@
+#input-data{
+    width:15rem;
+    height:5rem;
+}
+#converted-text{
+    width:15rem;
+    height:5rem;
+    font-size: 2rem;
+}
+#s-button{
+    height:3rem;
+    width:5rem;
+    margin:1rem;
+}

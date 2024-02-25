@@ -1,0 +1,27 @@
+.container {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  max-width: 600px;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+input[type="submit"],
+input[type="reset"] {
+  margin-top: 20px;
+}
+.checkbox-group .checkboxes,
+.radio-group .radios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.checkbox-group .checkboxes label,
+.radio-group .radios label {
+  margin-right: 5px;
+}

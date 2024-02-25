@@ -1,0 +1,38 @@
+#container{
+    height:500px;
+    position: relative;
+}
+
+#para1{
+    border:20px;
+    border-color: blue;
+    border-style: solid;
+    width:20%;
+    height: 40%;
+    position:absolute;
+    cursor: pointer;
+    z-index: 1;
+}
+#para2{
+    border:20px;
+    border-color: black;
+    border-style: solid;
+    width:20%;
+    height: 40%;
+    position:absolute;
+    top:30px;
+    cursor: pointer;
+    z-index:2;
+}
+#para3{
+    border:20px;
+    border-color: red;
+    border-style: solid;
+    width:20%;
+    height:40%;
+    position:absolute;
+    top:60px;
+    cursor: pointer;
+    z-index:3;
+}
+

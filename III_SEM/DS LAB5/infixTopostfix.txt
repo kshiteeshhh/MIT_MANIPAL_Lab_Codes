@@ -1,0 +1,137 @@
+#include<iostream>
+using namespace std;
+#include <cstring>
+class Stack
+{
+public:
+     int top;char s[100];
+     Stack()
+    { top = -1;}
+     void push(int n);
+     void pop();
+     void display();
+     char topfn();
+     bool isempty();
+};
+void Stack:: push(int n)
+{
+   if(top==99)
+   {
+      cout<<"stack overflow"<<endl;
+      return;
+   }
+   s[++top]=n;
+}
+void Stack::pop()
+{
+   if(top==-1)
+   {
+      cout<<"stack is empty"<<endl;
+      return;
+   }
+   top--;
+}
+char Stack::topfn()
+{
+   return s[top];
+}
+bool Stack::isempty()
+{
+  if(top==-1){return true;}
+  return false;
+}
+void Stack::display()
+{
+   if(top==-1)
+   {
+      cout<<"stack is empty"<<endl;
+      return;
+   }
+   cout<<"elements of the stack"<<endl;
+   for(int i=0;i<=top;i++)
+   {
+      cout<<s[i]<<" ";
+   }
+   cout<<endl;
+}
+int prec(char c)
+{
+    switch(c)
+    {
+        case '*':
+        case '/':return 4;
+                break;
+        case '+':
+        case '-':return 3;
+                 break;
+        case '(':return 2;
+                 break;
+    }
+}
+int main()
+{
+    char s[100];
+    cin>>s;
+    Stack obj; char postf[100];
+    int k=0;
+    int n=strlen(s); char c1,c2;int precedence;
+    for(int i=0;i<n;i++)
+    {
+       c1=s[i];
+       switch(c1)
+       {
+          case '(':obj.push(c1);
+                   break;
+          case ')': {char ch=obj.topfn();
+                     obj.pop();
+                    while(ch!='(')
+                    {
+                       if(!obj.isempty())
+                       {
+                            postf[k++]=ch;
+                            ch=obj.topfn();
+                            obj.pop();
+                       }
+                       else
+                       {
+                           break;
+                       }
+                    }
+                    break;
+          }
+          case '*':
+          case '+':
+          case '-':
+          case '/':  if(!obj.isempty())
+                     {
+                        c2=obj.topfn();
+                        obj.pop();
+                        precedence=prec(c1);
+                        while(precedence<=prec(c2))
+                        {
+                           postf[k++]=c2;
+                           if(!obj.isempty())
+                           {c2=obj.topfn();
+                           obj.pop();}
+                           else
+                           {break;}
+                        }
+                        if(precedence>prec(c2))
+                        {
+                           obj.push(c2);
+                        }
+                     }
+                     obj.push(c1);
+                     break;
+            default: postf[k++]=c1;
+
+        }
+    }
+    while(!obj.isempty())
+    {
+       postf[k++]=obj.topfn();
+       obj.pop();
+    }
+    postf[k]='\0';
+    cout<<postf<<endl;
+}
